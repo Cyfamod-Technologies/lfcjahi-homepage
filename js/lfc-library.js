@@ -44,7 +44,6 @@
 
   function populateFilters() {
     yearFilter.innerHTML = '<option value="">All Years</option>';
-    monthFilter.innerHTML = '<option value="">All Months</option>';
     pastorFilter.innerHTML = '<option value="">All Pastors</option>';
 
     var years = Array.from(new Set(messages.map(function (msg) {
@@ -60,13 +59,6 @@
       yearFilter.appendChild(option);
     });
 
-    monthNames.forEach(function (month, index) {
-      var option = document.createElement('option');
-      option.value = String(index + 1);
-      option.textContent = month;
-      monthFilter.appendChild(option);
-    });
-
     var pastors = Array.from(new Set(messages.map(function (msg) {
       return msg.pastor;
     }))).sort();
@@ -77,6 +69,50 @@
       option.textContent = pastor;
       pastorFilter.appendChild(option);
     });
+
+    refreshMonthFilterOptions({
+      searchValue: searchInput.value.trim().toLowerCase(),
+      yearValue: yearFilter.value,
+      pastorValue: pastorFilter.value,
+      serviceValue: serviceFilter.value
+    });
+  }
+
+  function refreshMonthFilterOptions(criteria) {
+    var currentMonthValue = monthFilter.value;
+    monthFilter.innerHTML = '<option value="">All Months</option>';
+
+    var availableMonths = Array.from(new Set(messages
+      .filter(function (msg) {
+        var date = parseDate(msg.date);
+        var matchesSearch = !criteria.searchValue || [msg.title, msg.pastor, msg.description, msg.scripture, msg.series]
+          .join(' ')
+          .toLowerCase()
+          .indexOf(criteria.searchValue) !== -1;
+        var matchesYear = !criteria.yearValue || String(date.getFullYear()) === criteria.yearValue;
+        var matchesPastor = !criteria.pastorValue || msg.pastor === criteria.pastorValue;
+        var matchesService = !criteria.serviceValue || normalizeService(msg.series) === criteria.serviceValue;
+
+        return matchesSearch && matchesYear && matchesPastor && matchesService;
+      })
+      .map(function (msg) {
+        return String(parseDate(msg.date).getMonth() + 1);
+      }))).sort(function (a, b) {
+      return Number(a) - Number(b);
+    });
+
+    availableMonths.forEach(function (monthValue) {
+      var option = document.createElement('option');
+      option.value = monthValue;
+      option.textContent = monthNames[Number(monthValue) - 1];
+      monthFilter.appendChild(option);
+    });
+
+    if (availableMonths.indexOf(currentMonthValue) !== -1) {
+      monthFilter.value = currentMonthValue;
+    } else {
+      monthFilter.value = '';
+    }
   }
 
   function normalizeService(value) {
@@ -191,9 +227,17 @@
   function filterAndRender() {
     var searchValue = searchInput.value.trim().toLowerCase();
     var yearValue = yearFilter.value;
-    var monthValue = monthFilter.value;
     var pastorValue = pastorFilter.value;
     var serviceValue = serviceFilter.value;
+
+    refreshMonthFilterOptions({
+      searchValue: searchValue,
+      yearValue: yearValue,
+      pastorValue: pastorValue,
+      serviceValue: serviceValue
+    });
+
+    var monthValue = monthFilter.value;
 
     var filtered = messages.filter(function (msg) {
       var date = parseDate(msg.date);
@@ -230,11 +274,17 @@
     if (defaultYear) {
       yearFilter.value = defaultYear;
     }
-    if (defaultMonth) {
-      monthFilter.value = defaultMonth;
-    }
     if (defaultService) {
       serviceFilter.value = defaultService;
+    }
+    refreshMonthFilterOptions({
+      searchValue: searchInput.value.trim().toLowerCase(),
+      yearValue: yearFilter.value,
+      pastorValue: pastorFilter.value,
+      serviceValue: serviceFilter.value
+    });
+    if (defaultMonth) {
+      monthFilter.value = defaultMonth;
     }
   }
 
