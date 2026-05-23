@@ -1,11 +1,11 @@
-/* Import existing vendor and theme CSS from public folder */
+/* Bootstrap must come before our theme */
 @import url('/css/bootstrap.min.css');
+/*
+  style.css already @imports: all.min.css, fontawesome.min.css,
+  ionicons.min.css, slick.min.css, owl.carousel.min.css,
+  magnific-popup.min.css — no need to repeat them here.
+  Font Awesome fonts are served from /fonts/ (public/fonts symlink).
+*/
 @import url('/css/style.css');
 @import url('/css/responsive.css');
 @import url('/css/lfc-jahi-media.css');
-@import url('/css/all.min.css');
-@import url('/css/fontawesome.min.css');
-@import url('/css/ionicons.min.css');
-@import url('/css/owl.carousel.min.css');
-@import url('/css/slick.min.css');
-@import url('/css/magnific-popup.min.css');
