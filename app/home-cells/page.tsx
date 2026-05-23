@@ -4,6 +4,7 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import BackToTop from '@/components/BackToTop'
 import HomeCellsList from '@/components/HomeCellsList'
+import './home-cells.css'
 import { fetchHomeCells } from '@/lib/api'
 
 export const metadata: Metadata = {

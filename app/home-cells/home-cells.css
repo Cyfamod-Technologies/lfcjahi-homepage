@@ -1,0 +1,288 @@
+/* Ported from the inline <style> block in home-cells.html */
+
+.lfc-cell-card {
+  background: linear-gradient(135deg, var(--lfc-surface) 0%, rgba(20, 20, 20, 0.8) 100%);
+  border: 3px solid var(--lfc-border);
+  border-radius: 15px;
+  padding: 35px;
+  margin-bottom: 30px;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.lfc-cell-card:hover {
+  border-color: var(--lfc-accent);
+  box-shadow: 0 10px 30px rgba(229, 9, 20, 0.25);
+  transform: translateY(-4px);
+}
+
+.lfc-cell-card h4 {
+  color: var(--lfc-accent);
+  margin-bottom: 25px;
+  padding-bottom: 18px;
+  border-bottom: 4px solid var(--lfc-accent);
+  font-size: 28px;
+}
+
+.lfc-info-group {
+  margin-bottom: 25px;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  border-left: 6px solid var(--lfc-accent);
+}
+
+.lfc-info-label {
+  font-weight: 700;
+  color: var(--lfc-accent);
+  font-size: 18px;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.lfc-info-value {
+  color: #e8e8e8;
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+.lfc-search-box {
+  position: relative;
+  margin-bottom: 35px;
+}
+
+.lfc-search-box .form-control {
+  background-color: var(--lfc-surface-alt);
+  border: 3px solid var(--lfc-accent);
+  color: #fff;
+  height: 65px;
+  padding: 18px 25px;
+  font-size: 19px !important;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.lfc-search-box .form-control:focus {
+  background-color: var(--lfc-surface-alt);
+  border-color: var(--lfc-accent);
+  color: #fff;
+  box-shadow: 0 0 0 6px rgba(229, 9, 20, 0.15);
+}
+
+.lfc-search-box .form-control::placeholder {
+  color: var(--lfc-muted);
+  font-size: 19px;
+}
+
+.lfc-search-hint {
+  font-size: 18px;
+  color: var(--lfc-muted);
+  margin-top: 10px;
+}
+
+.lfc-zone-section {
+  background-color: rgba(229, 9, 20, 0.1);
+  border-left: 6px solid var(--lfc-accent);
+  padding: 30px;
+  margin: 30px 0;
+  border-radius: 10px;
+}
+
+.lfc-zone-section h5 {
+  color: var(--lfc-accent);
+  margin-bottom: 25px;
+  font-size: 24px;
+}
+
+.lfc-host-cta {
+  margin-bottom: 18px;
+}
+
+.lfc-host-cta .gen-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 56px;
+  border-radius: 999px;
+  padding: 12px 28px;
+  box-shadow: 0 14px 28px rgba(229, 9, 20, 0.2);
+}
+
+.lfc-host-modal .modal-content {
+  background: linear-gradient(180deg, rgba(26, 26, 26, 0.98) 0%, rgba(17, 17, 17, 0.98) 100%);
+  border: 1px solid rgba(229, 9, 20, 0.3);
+  border-radius: 20px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+}
+
+.lfc-host-modal .modal-header,
+.lfc-host-modal .modal-footer {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.lfc-host-modal .modal-title,
+.lfc-host-modal .modal-body {
+  color: #ffffff;
+}
+
+.lfc-host-modal .close {
+  color: #ffffff;
+  opacity: 0.85;
+  text-shadow: none;
+}
+
+.lfc-host-modal .modal-body {
+  font-size: 19px;
+  line-height: 1.7;
+}
+
+.lfc-host-actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.lfc-host-actions .gen-button {
+  min-width: 120px;
+  justify-content: center;
+}
+
+.lfc-cells-table {
+  margin-top: 25px;
+}
+
+.lfc-cells-table .table {
+  background-color: transparent;
+  margin: 0;
+  font-size: 17px;
+}
+
+.lfc-cells-table .table thead {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.lfc-cells-table .table thead th {
+  color: var(--lfc-accent);
+  border: 2px solid var(--lfc-border);
+  padding: 18px;
+  font-weight: 700;
+  font-size: 17px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.lfc-cells-table .table tbody td {
+  color: #e8e8e8;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  padding: 16px;
+  font-size: 17px;
+  vertical-align: middle;
+}
+
+.lfc-cells-table .table tbody tr {
+  transition: background-color 0.25s ease;
+}
+
+.lfc-cells-table .table tbody tr:hover {
+  background-color: rgba(229, 9, 20, 0.12);
+}
+
+.lfc-cells-table .table tbody tr td strong {
+  color: #fff;
+  display: block;
+  font-size: 18px;
+  margin-bottom: 6px;
+}
+
+.lfc-cells-table .table tbody tr td a {
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.lfc-district-filter {
+  margin-bottom: 35px;
+  max-width: 420px;
+}
+
+.lfc-district-filter label {
+  display: block;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--lfc-accent);
+  margin-bottom: 12px;
+}
+
+.lfc-district-filter .custom-select {
+  background-color: var(--lfc-surface-alt);
+  border: 3px solid var(--lfc-accent);
+  color: #fff;
+  height: 65px;
+  padding: 0 20px;
+  font-size: 18px;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.lfc-district-filter .custom-select:focus {
+  background-color: var(--lfc-surface-alt);
+  border-color: var(--lfc-accent);
+  color: #fff;
+  box-shadow: 0 0 0 6px rgba(229, 9, 20, 0.15);
+}
+
+.lfc-no-results {
+  background: linear-gradient(135deg, rgba(229, 9, 20, 0.15) 0%, rgba(229, 9, 20, 0.08) 100%);
+  border: 3px solid var(--lfc-border);
+  border-radius: 12px;
+  padding: 50px 30px;
+  text-align: center;
+}
+
+.lfc-no-results h5 {
+  color: var(--lfc-accent);
+  margin-bottom: 20px;
+  font-size: 28px;
+}
+
+.lfc-no-results p {
+  color: var(--lfc-muted);
+  font-size: 20px;
+}
+
+@media (max-width: 768px) {
+  .lfc-cell-card {
+    padding: 25px;
+  }
+
+  .lfc-search-box .form-control {
+    height: 60px;
+    font-size: 17px !important;
+  }
+
+  .lfc-cells-table .table {
+    font-size: 15px;
+  }
+
+  .lfc-cells-table .table thead th {
+    padding: 14px;
+    font-size: 15px;
+  }
+
+  .lfc-cells-table .table tbody td {
+    padding: 13px;
+    font-size: 15px;
+  }
+
+  .lfc-district-filter {
+    max-width: 100%;
+  }
+
+  .lfc-district-filter label {
+    font-size: 16px;
+  }
+
+  .lfc-district-filter .custom-select {
+    height: 58px;
+    font-size: 16px;
+  }
+}
