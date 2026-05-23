@@ -1,24 +1,33 @@
 'use client'
 
 import { useEffect } from 'react'
+import { usePathname } from 'next/navigation'
 
 export default function PageEffects() {
+  const pathname = usePathname()
+
+  // Re-run every time the route changes (client-side navigation re-shows the
+  // preloader div from the new page component, so we must hide it again).
   useEffect(() => {
-    // Hide preloader
     const loader = document.getElementById('gen-loading')
     if (loader) {
-      loader.style.transition = 'opacity 0.6s ease'
-      loader.style.opacity = '0'
-      setTimeout(() => {
-        loader.style.display = 'none'
-      }, 600)
+      loader.style.display = 'block'
+      loader.style.opacity = '1'
+      loader.style.transition = 'opacity 0.5s ease'
+      // Small delay so the new page content renders first
+      const t = setTimeout(() => {
+        loader.style.opacity = '0'
+        setTimeout(() => { loader.style.display = 'none' }, 500)
+      }, 50)
+      return () => clearTimeout(t)
     }
+  }, [pathname])
 
-    // Hide back-to-top initially
+  // Scroll effects — scroll listener lives for the whole session
+  useEffect(() => {
     const backToTop = document.getElementById('back-to-top')
     if (backToTop) backToTop.style.display = 'none'
 
-    // Sticky header + back-to-top on scroll
     let ticking = false
     function onScroll() {
       if (ticking) return
