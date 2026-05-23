@@ -26,6 +26,7 @@ export default function MessageLibrary({ messages }: MessageLibraryProps) {
   const [pastor, setPastor] = useState(searchParams.get('pastor') || '')
   const [service, setService] = useState(searchParams.get('service') || '')
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE)
+  const [showAdvancedFilters, setShowAdvancedFilters] = useState(false)
 
   const latestMessage = useMemo(() => sortByDate(messages)[0] || null, [messages])
 
@@ -84,6 +85,7 @@ export default function MessageLibrary({ messages }: MessageLibraryProps) {
   }, [availableMonths, month])
 
   const visible = filtered.slice(0, visibleCount)
+  const activeFilterCount = [year, month, pastor, service].filter(Boolean).length
 
   const clearFilters = useCallback(() => {
     setSearch('')
@@ -92,6 +94,7 @@ export default function MessageLibrary({ messages }: MessageLibraryProps) {
     setPastor('')
     setService('')
     setVisibleCount(PAGE_SIZE)
+    setShowAdvancedFilters(false)
   }, [])
 
   const handleSearch = useCallback(() => {
@@ -119,44 +122,63 @@ export default function MessageLibrary({ messages }: MessageLibraryProps) {
                   onChange={(e) => setSearch(e.target.value)}
                 />
               </div>
-              <div className="col-lg-2 col-md-6 mb-3">
-                <label className="text-white mb-2" htmlFor="yearFilter">Year</label>
-                <select id="yearFilter" className="custom-select" value={year} onChange={(e) => { setYear(e.target.value); setVisibleCount(PAGE_SIZE) }}>
-                  <option value="">All Years</option>
-                  {years.map((y) => <option key={y} value={y}>{y}</option>)}
-                </select>
+              <div className="col-12 mb-3 lfc-mobile-filter-toggle-wrap">
+                <button
+                  type="button"
+                  className="lfc-mobile-filter-toggle"
+                  onClick={() => setShowAdvancedFilters((open) => !open)}
+                  aria-expanded={showAdvancedFilters}
+                  aria-controls="advancedFilters"
+                >
+                  <span>{showAdvancedFilters ? 'Hide Filters' : 'More Filters'}</span>
+                  <span>{activeFilterCount > 0 ? `${activeFilterCount} active` : 'Optional'}</span>
+                </button>
               </div>
-              <div className="col-lg-2 col-md-6 mb-3">
-                <label className="text-white mb-2" htmlFor="monthFilter">Month</label>
-                <select id="monthFilter" className="custom-select" value={month} onChange={(e) => { setMonth(e.target.value); setVisibleCount(PAGE_SIZE) }}>
-                  <option value="">All Months</option>
-                  {availableMonths.map((m) => (
-                    <option key={m} value={m}>{MONTH_NAMES[Number(m) - 1]}</option>
-                  ))}
-                </select>
-              </div>
-              <div className="col-lg-2 col-md-6 mb-3">
-                <label className="text-white mb-2" htmlFor="pastorFilter">Pastor</label>
-                <select id="pastorFilter" className="custom-select" value={pastor} onChange={(e) => { setPastor(e.target.value); setVisibleCount(PAGE_SIZE) }}>
-                  <option value="">All Pastors</option>
-                  {pastors.map((p) => <option key={p} value={p}>{p}</option>)}
-                </select>
-              </div>
-              <div className="col-lg-2 col-md-6 mb-3">
-                <label className="text-white mb-2" htmlFor="serviceFilter">Service</label>
-                <select id="serviceFilter" className="custom-select" value={service} onChange={(e) => { setService(e.target.value); setVisibleCount(PAGE_SIZE) }}>
-                  <option value="">All Services</option>
-                  <option value="Sunday First Service">Sunday First Service</option>
-                  <option value="Sunday Second Service">Sunday Second Service</option>
-                  <option value="Sunday Third Service">Sunday Third Service</option>
-                  <option value="Week of Spiritual Emphasis">Week of Spiritual Emphasis</option>
-                  <option value="Midweek Service">Midweek Service</option>
-                  <option value="Special Program">Special Program</option>
-                  <option value="Other">Other</option>
-                </select>
+              <div
+                id="advancedFilters"
+                className={`col-12 lfc-filter-advanced ${showAdvancedFilters ? 'is-open' : ''}`}
+              >
+                <div className="row">
+                  <div className="col-lg-2 col-md-6 mb-3">
+                    <label className="text-white mb-2" htmlFor="yearFilter">Year</label>
+                    <select id="yearFilter" className="custom-select" value={year} onChange={(e) => { setYear(e.target.value); setVisibleCount(PAGE_SIZE) }}>
+                      <option value="">All Years</option>
+                      {years.map((y) => <option key={y} value={y}>{y}</option>)}
+                    </select>
+                  </div>
+                  <div className="col-lg-2 col-md-6 mb-3">
+                    <label className="text-white mb-2" htmlFor="monthFilter">Month</label>
+                    <select id="monthFilter" className="custom-select" value={month} onChange={(e) => { setMonth(e.target.value); setVisibleCount(PAGE_SIZE) }}>
+                      <option value="">All Months</option>
+                      {availableMonths.map((m) => (
+                        <option key={m} value={m}>{MONTH_NAMES[Number(m) - 1]}</option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className="col-lg-2 col-md-6 mb-3">
+                    <label className="text-white mb-2" htmlFor="pastorFilter">Pastor</label>
+                    <select id="pastorFilter" className="custom-select" value={pastor} onChange={(e) => { setPastor(e.target.value); setVisibleCount(PAGE_SIZE) }}>
+                      <option value="">All Pastors</option>
+                      {pastors.map((p) => <option key={p} value={p}>{p}</option>)}
+                    </select>
+                  </div>
+                  <div className="col-lg-2 col-md-6 mb-3">
+                    <label className="text-white mb-2" htmlFor="serviceFilter">Service</label>
+                    <select id="serviceFilter" className="custom-select" value={service} onChange={(e) => { setService(e.target.value); setVisibleCount(PAGE_SIZE) }}>
+                      <option value="">All Services</option>
+                      <option value="Sunday First Service">Sunday First Service</option>
+                      <option value="Sunday Second Service">Sunday Second Service</option>
+                      <option value="Sunday Third Service">Sunday Third Service</option>
+                      <option value="Week of Spiritual Emphasis">Week of Spiritual Emphasis</option>
+                      <option value="Midweek Service">Midweek Service</option>
+                      <option value="Special Program">Special Program</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+                </div>
               </div>
               <div className="col-lg-12">
-                <div className="d-flex justify-content-between align-items-center">
+                <div className="lfc-filter-actions">
                   <button className="gen-button" onClick={handleSearch}>
                     <span className="text">Search</span>
                   </button>
