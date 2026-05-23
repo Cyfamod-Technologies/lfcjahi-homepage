@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import type { Message } from '@/lib/types'
 import { formatDate } from '@/lib/utils'
 
@@ -16,8 +17,15 @@ export default function MessageCard({ message }: MessageCardProps) {
         <div className="gen-carousel-movies-style-1 movie-grid style-1">
           <div className="gen-movie-contain">
             <div className="gen-movie-img">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={message.image} alt={message.title} loading="lazy" decoding="async" />
+              <Image
+                src={message.image}
+                alt={message.title}
+                width={400}
+                height={300}
+                style={{ width: '100%', height: '300px', objectFit: 'cover' }}
+                sizes="(max-width: 576px) 100vw, (max-width: 992px) 50vw, 25vw"
+                loading="lazy"
+              />
               <div className="gen-movie-action">
                 <span className="gen-button" aria-label={`Play ${message.title}`}>
                   <i className="fa fa-play"></i>
@@ -35,8 +43,14 @@ export default function MessageCard({ message }: MessageCardProps) {
                 </ul>
               </div>
               <div className="lfc-card-speaker">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img className="lfc-card-speaker-image" src={pastorImage} alt={message.pastor} loading="lazy" decoding="async" />
+                <Image
+                  className="lfc-card-speaker-image"
+                  src={pastorImage}
+                  alt={message.pastor}
+                  width={34}
+                  height={34}
+                  loading="lazy"
+                />
                 <p className="lfc-card-note">{message.pastor}</p>
               </div>
             </div>

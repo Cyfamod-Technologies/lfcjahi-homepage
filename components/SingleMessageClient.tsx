@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import type { Message } from '@/lib/types'
 import { formatDate, buildDownloadBaseName, getFileExtension } from '@/lib/utils'
@@ -119,13 +120,14 @@ export default function SingleMessageClient({ message, related }: SingleMessageC
               <div className="lfc-single-card">
                 <div className="lfc-speaker-summary">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
+                  <Image
                     id="messageSpeakerImage"
                     className="lfc-speaker-summary-image"
                     src={message.speakerImage || message.image}
                     alt={message.pastor}
+                    width={72}
+                    height={72}
                     loading="lazy"
-                    decoding="async"
                   />
                   <div className="lfc-speaker-summary-copy">
                     <span className="lfc-pastor-chip" id="messagePastorChip">{message.pastor}</span>
