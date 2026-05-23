@@ -24,6 +24,7 @@ export default function MessageCard({ message }: MessageCardProps) {
                 height={300}
                 style={{ width: '100%', height: '300px', objectFit: 'cover' }}
                 sizes="(max-width: 576px) 100vw, (max-width: 992px) 50vw, 25vw"
+                quality={60}
                 loading="lazy"
               />
               <div className="gen-movie-action">
@@ -49,6 +50,7 @@ export default function MessageCard({ message }: MessageCardProps) {
                   alt={message.pastor}
                   width={34}
                   height={34}
+                  quality={45}
                   loading="lazy"
                 />
                 <p className="lfc-card-note">{message.pastor}</p>

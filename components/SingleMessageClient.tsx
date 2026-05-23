@@ -86,12 +86,16 @@ export default function SingleMessageClient({ message, related }: SingleMessageC
           <div className="row">
             <div className="col-lg-8 mb-4">
               <div className="lfc-single-card">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
                   id="messageImage"
                   className="lfc-single-image"
                   src={message.image}
                   alt={message.title}
+                  width={1280}
+                  height={720}
+                  sizes="(max-width: 992px) 100vw, 66vw"
+                  quality={65}
+                  priority
                 />
                 <audio id="audioPlayer" className="lfc-audio" controls preload="none">
                   Your browser does not support the audio element.
@@ -122,13 +126,14 @@ export default function SingleMessageClient({ message, related }: SingleMessageC
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <Image
                     id="messageSpeakerImage"
-                    className="lfc-speaker-summary-image"
-                    src={message.speakerImage || message.image}
-                    alt={message.pastor}
-                    width={72}
-                    height={72}
-                    loading="lazy"
-                  />
+                  className="lfc-speaker-summary-image"
+                  src={message.speakerImage || message.image}
+                  alt={message.pastor}
+                  width={72}
+                  height={72}
+                  quality={50}
+                  loading="lazy"
+                />
                   <div className="lfc-speaker-summary-copy">
                     <span className="lfc-pastor-chip" id="messagePastorChip">{message.pastor}</span>
                   </div>
