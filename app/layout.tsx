@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import './globals.css'
+import PageEffects from '@/components/PageEffects'
 
 export const viewport: Viewport = {
   themeColor: '#e50914',
@@ -49,6 +50,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         {children}
+        <PageEffects />
       </body>
     </html>
   )
