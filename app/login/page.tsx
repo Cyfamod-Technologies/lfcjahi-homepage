@@ -3,12 +3,15 @@ import Link from 'next/link'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import BackToTop from '@/components/BackToTop'
+import { buildPageMetadata } from '@/lib/seo'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
+  path: '/login',
   title: 'Login Portal',
   description: 'Select your LFC-JAHI access role to continue to the login portal.',
-  robots: { index: false, follow: false },
-}
+  keywords: ['church staff login', 'LFC Jahi portal', 'secure access'],
+  noIndex: true,
+})
 
 const PORTALS = [
   { label: 'Homecell-Leader', href: 'https://homecell.lfcjahi.com' },

@@ -7,18 +7,20 @@ import BackToTop from '@/components/BackToTop'
 import MessageLibrary from '@/components/MessageLibrary'
 import { fetchMessages } from '@/lib/api'
 import { sortByDate } from '@/lib/utils'
+import { buildPageMetadata } from '@/lib/seo'
 
-export const metadata: Metadata = {
-  title: 'LFC-JAHI MEDIA | Powerful Audio Messages & Sermons',
-  description: 'Access and download powerful audio messages and sermons from Living Faith Church Jahi. Grow spiritually with life-transforming teachings from anointed ministers.',
-  alternates: { canonical: 'https://lfcjahi.com/' },
-  openGraph: {
-    url: 'https://lfcjahi.com/',
-    title: 'LFC-JAHI MEDIA | Powerful Audio Messages & Sermons',
-    description: 'Access and download powerful audio messages and sermons from Living Faith Church Jahi.',
-    type: 'website',
-  },
-}
+export const metadata: Metadata = buildPageMetadata({
+  path: '/',
+  title: 'Powerful Audio Messages & Sermons',
+  description:
+    'Access and download powerful audio messages and sermons from Living Faith Church Jahi. Grow spiritually with life-transforming teachings from anointed ministers.',
+  keywords: [
+    'Living Faith Church sermons',
+    'Winners Chapel audio messages',
+    'church sermon downloads',
+    'Christian messages Abuja',
+  ],
+})
 
 export default async function HomePage() {
   const messages = await fetchMessages()

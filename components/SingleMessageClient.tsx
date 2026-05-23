@@ -124,6 +124,8 @@ export default function SingleMessageClient({ message, related }: SingleMessageC
                     className="lfc-speaker-summary-image"
                     src={message.speakerImage || message.image}
                     alt={message.pastor}
+                    loading="lazy"
+                    decoding="async"
                   />
                   <div className="lfc-speaker-summary-copy">
                     <span className="lfc-pastor-chip" id="messagePastorChip">{message.pastor}</span>

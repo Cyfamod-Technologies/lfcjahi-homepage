@@ -6,7 +6,8 @@ import Footer from '@/components/Footer'
 import BackToTop from '@/components/BackToTop'
 import SingleMessageClient from '@/components/SingleMessageClient'
 import { fetchMessages, fetchMessageById } from '@/lib/api'
-import { formatDate, sortByDate } from '@/lib/utils'
+import { sortByDate } from '@/lib/utils'
+import { buildMessageMetadata, buildPageMetadata } from '@/lib/seo'
 
 interface PageProps {
   params: Promise<{ id: string }>
@@ -15,30 +16,16 @@ interface PageProps {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { id } = await params
   const message = await fetchMessageById(decodeURIComponent(id))
-  if (!message) return { title: 'Message Not Found' }
-
-  const formattedDate = formatDate(message.date, 'long')
-  const description = `${message.title} - ${message.series} by ${message.pastor} on ${formattedDate}. Listen and download from LFC Jahi.`
-  const url = `https://lfcjahi.com/messages/${encodeURIComponent(message.id)}`
-
-  return {
-    title: `${message.title} | ${message.pastor}`,
-    description,
-    alternates: { canonical: url },
-    openGraph: {
-      type: 'article',
-      url,
-      title: `${message.title} | ${message.pastor}`,
-      description,
-      images: [{ url: message.image || 'https://lfcjahi.com/images/og-image.jpg' }],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: `${message.title} | ${message.pastor}`,
-      description,
-      images: [message.image || 'https://lfcjahi.com/images/og-image.jpg'],
-    },
+  if (!message) {
+    return buildPageMetadata({
+      path: `/messages/${encodeURIComponent(id)}`,
+      title: 'Message Not Found',
+      description: 'The requested audio message could not be found in the LFC-JAHI MEDIA library.',
+      noIndex: true,
+    })
   }
+
+  return buildMessageMetadata(message)
 }
 
 export async function generateStaticParams() {

@@ -5,17 +5,20 @@ import Footer from '@/components/Footer'
 import BackToTop from '@/components/BackToTop'
 import DistrictsTable from '@/components/DistrictsTable'
 import { fetchDistricts } from '@/lib/api'
+import { buildPageMetadata } from '@/lib/seo'
 
-export const metadata: Metadata = {
-  title: 'LFC-JAHI Districts | Winners Satellite Fellowship Locations',
-  description: 'Find Winners Satellite Fellowship districts and outreach locations in Jahi, Abuja. Join a fellowship near you and connect with the Living Faith Church community.',
-  alternates: { canonical: 'https://lfcjahi.com/districts' },
-  openGraph: {
-    url: 'https://lfcjahi.com/districts',
-    title: 'LFC-JAHI Districts | Winners Satellite Fellowship Locations',
-    description: 'Find Winners Satellite Fellowship districts and outreach locations in Jahi, Abuja.',
-  },
-}
+export const metadata: Metadata = buildPageMetadata({
+  path: '/districts',
+  title: 'Districts & Winners Satellite Fellowship Locations',
+  description:
+    'Find Winners Satellite Fellowship districts and outreach locations in Jahi, Abuja. Join a fellowship near you and connect with the Living Faith Church community.',
+  keywords: [
+    'LFC Jahi districts',
+    'Winners Satellite Fellowship Abuja',
+    'church outreach locations Jahi',
+    'district fellowship directory',
+  ],
+})
 
 const latestMessageAction = (
   <Link href="/messages" className="gen-button">

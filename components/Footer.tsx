@@ -15,7 +15,7 @@ export default function Footer({ minimal = false }: FooterProps) {
                 <div className="col-xl-4 col-md-6">
                   <div className="widget">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src="/images/logo-1.png" className="gen-footer-logo" alt="LFC-JAHI MEDIA logo" />
+                    <img src="/images/logo-1.png" className="gen-footer-logo" alt="LFC-JAHI MEDIA logo" loading="lazy" decoding="async" />
                     <p>Audio sermons for spiritual growth, anytime and anywhere.</p>
                     <div className="gen-social-links mt-3">
                       <a href="https://web.facebook.com/lfcjahiabuja" target="_blank" rel="noopener noreferrer" title="Follow on Facebook">

@@ -17,7 +17,7 @@ export default function MessageCard({ message }: MessageCardProps) {
           <div className="gen-movie-contain">
             <div className="gen-movie-img">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={message.image} alt={message.title} />
+              <img src={message.image} alt={message.title} loading="lazy" decoding="async" />
               <div className="gen-movie-action">
                 <span className="gen-button" aria-label={`Play ${message.title}`}>
                   <i className="fa fa-play"></i>
@@ -36,7 +36,7 @@ export default function MessageCard({ message }: MessageCardProps) {
               </div>
               <div className="lfc-card-speaker">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img className="lfc-card-speaker-image" src={pastorImage} alt={message.pastor} />
+                <img className="lfc-card-speaker-image" src={pastorImage} alt={message.pastor} loading="lazy" decoding="async" />
                 <p className="lfc-card-note">{message.pastor}</p>
               </div>
             </div>

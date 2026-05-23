@@ -1,30 +1,73 @@
 import type { Metadata, Viewport } from 'next'
-import './globals.css'
 import PageEffects from '@/components/PageEffects'
+import { seoSite } from '@/lib/seo'
 
 export const viewport: Viewport = {
   themeColor: '#e50914',
 }
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://lfcjahi.com'),
+  metadataBase: new URL(seoSite.siteUrl),
   title: {
-    default: 'LFC-JAHI MEDIA | Powerful Audio Messages & Sermons',
-    template: '%s | LFC-JAHI MEDIA',
+    default: `${seoSite.siteName} | ${seoSite.defaultTitle}`,
+    template: `%s | ${seoSite.siteName}`,
   },
-  description: 'Access and download powerful audio messages and sermons from Living Faith Church Jahi. Grow spiritually with life-transforming teachings from anointed ministers.',
-  keywords: ['LFC-JAHI MEDIA', 'Living Faith Church Jahi', 'Winners Chapel Jahi', 'audio messages', 'sermons', 'Christian teachings', 'Abuja church'],
-  authors: [{ name: 'LFC-JAHI MEDIA' }],
-  robots: { index: true, follow: true },
+  description: seoSite.defaultDescription,
+  keywords: seoSite.defaultKeywords,
+  authors: [{ name: seoSite.siteName, url: seoSite.siteUrl }],
+  creator: seoSite.siteName,
+  publisher: seoSite.siteName,
+  category: 'religion',
+  classification: 'Christian media and church resources',
+  referrer: 'origin-when-cross-origin',
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    },
+  },
+  alternates: {
+    canonical: seoSite.siteUrl,
+  },
   openGraph: {
     type: 'website',
-    siteName: 'LFC-JAHI MEDIA',
+    url: seoSite.siteUrl,
+    title: `${seoSite.siteName} | ${seoSite.defaultTitle}`,
+    description: seoSite.defaultDescription,
+    siteName: seoSite.siteName,
     locale: 'en_NG',
-    images: [{ url: 'https://lfcjahi.com/images/og-image.jpg' }],
+    countryName: 'Nigeria',
+    images: [
+      {
+        url: seoSite.defaultOgImage,
+        width: 1200,
+        height: 630,
+        alt: seoSite.siteName,
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
-    images: ['https://lfcjahi.com/images/og-image.jpg'],
+    title: `${seoSite.siteName} | ${seoSite.defaultTitle}`,
+    description: seoSite.defaultDescription,
+    images: [seoSite.defaultOgImage],
+  },
+  icons: {
+    icon: [{ url: '/images/favicon.png' }],
+    shortcut: ['/images/favicon.png'],
+    apple: [{ url: '/images/favicon.png', sizes: '180x180' }],
+  },
+  other: {
+    'geo.region': 'NG-FC',
+    'geo.placename': seoSite.churchAddress,
+    'geo.address': seoSite.churchAddress,
+    'geo.locality': seoSite.churchLocality,
+    'geo.administrative_area': seoSite.churchRegion,
   },
 }
 
@@ -32,6 +75,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <head>
+        {/* Preconnect to external origins used heavily on every page */}
+        <link rel="preconnect" href="https://api.lfcjahi.com" />
+        <link rel="dns-prefetch" href="https://api.lfcjahi.com" />
+
+        {/* Parallel CSS loading — avoids the @import waterfall from globals.css */}
+        <link rel="stylesheet" href="/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="/css/style.css" />
+        <link rel="stylesheet" href="/css/responsive.css" />
+        <link rel="stylesheet" href="/css/lfc-jahi-media.css" />
+
         <link rel="shortcut icon" href="/images/favicon.png" />
         <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png" />
         {/* Inline script to prevent dark mode flash before hydration */}

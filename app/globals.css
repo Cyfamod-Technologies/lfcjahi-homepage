@@ -1,11 +1,2 @@
-/* Bootstrap must come before our theme */
-@import url('/css/bootstrap.min.css');
-/*
-  style.css already @imports: all.min.css, fontawesome.min.css,
-  ionicons.min.css, slick.min.css, owl.carousel.min.css,
-  magnific-popup.min.css — no need to repeat them here.
-  Font Awesome fonts are served from /fonts/ (public/fonts symlink).
-*/
-@import url('/css/style.css');
-@import url('/css/responsive.css');
-@import url('/css/lfc-jahi-media.css');
+/* CSS is loaded via <link> tags in app/layout.tsx for parallel loading.
+   Page-specific CSS (e.g. home-cells.css) is still imported per-page. */

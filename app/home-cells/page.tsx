@@ -6,17 +6,20 @@ import BackToTop from '@/components/BackToTop'
 import HomeCellsList from '@/components/HomeCellsList'
 import './home-cells.css'
 import { fetchHomeCells } from '@/lib/api'
+import { buildPageMetadata } from '@/lib/seo'
 
-export const metadata: Metadata = {
-  title: 'LFC-JAHI Home Cells | Fellowship Directory & Locations',
-  description: 'Find a home cell fellowship near you in Jahi, Abuja. Join our vibrant home cell community for midweek Bible study, prayer, and Christian fellowship at Living Faith Church.',
-  alternates: { canonical: 'https://lfcjahi.com/home-cells' },
-  openGraph: {
-    url: 'https://lfcjahi.com/home-cells',
-    title: 'LFC-JAHI Home Cells | Fellowship Directory & Locations',
-    description: 'Find a home cell fellowship near you in Jahi, Abuja.',
-  },
-}
+export const metadata: Metadata = buildPageMetadata({
+  path: '/home-cells',
+  title: 'Home Cells Fellowship Directory & Locations',
+  description:
+    'Find a home cell fellowship near you in Jahi, Abuja. Join our vibrant home cell community for midweek Bible study, prayer, and Christian fellowship at Living Faith Church.',
+  keywords: [
+    'LFC Jahi home cells',
+    'home fellowship Abuja',
+    'Bible study groups Jahi',
+    'Winners home cell directory',
+  ],
+})
 
 const latestMessageAction = (
   <Link href="/messages" className="gen-button">
