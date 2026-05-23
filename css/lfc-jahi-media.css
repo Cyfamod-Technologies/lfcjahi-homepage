@@ -17,7 +17,7 @@ body {
 .lfc-hero {
   position: relative;
   background: linear-gradient(110deg, rgba(0, 0, 0, 0.85) 35%, rgba(0, 0, 0, 0.25) 100%),
-    url('../images/background/asset-77.jpg') center/cover no-repeat;
+    url('../images/background/asset-77-1280.jpg') center/cover no-repeat;
   padding: 150px 0 80px;
 }
 
@@ -141,7 +141,7 @@ body {
 .lfc-single-hero {
   padding: 150px 0 60px;
   background: linear-gradient(120deg, rgba(0, 0, 0, 0.85) 20%, rgba(0, 0, 0, 0.4) 100%),
-    url('../images/background/asset-68.jpg') center/cover no-repeat;
+    url('../images/background/asset-68-1280.jpg') center/cover no-repeat;
 }
 
 .lfc-single-wrap {
@@ -498,6 +498,8 @@ body {
 
 @media (max-width: 767px) {
   .lfc-hero {
+    background-image: linear-gradient(110deg, rgba(0, 0, 0, 0.85) 35%, rgba(0, 0, 0, 0.25) 100%),
+      url('../images/background/asset-77-640.jpg');
     padding: 120px 0 70px;
   }
 
@@ -535,6 +537,16 @@ body {
   .lfc-featured-icon {
     font-size: 50px;
     margin-top: 15px;
+  }
+
+  .lfc-single-hero {
+    background-image: linear-gradient(120deg, rgba(0, 0, 0, 0.85) 20%, rgba(0, 0, 0, 0.4) 100%),
+      url('../images/background/asset-68-640.jpg');
+  }
+
+  .lfc-login-hero {
+    background-image: linear-gradient(120deg, rgba(0, 0, 0, 0.84) 20%, rgba(0, 0, 0, 0.46) 100%),
+      url('../images/background/asset-41-640.jpg');
   }
 }
 
@@ -1039,7 +1051,7 @@ header#gen-header.gen-header-style-1 .gen-bottom-header .navbar .navbar-nav li.l
 .lfc-login-hero {
   position: relative;
   background: linear-gradient(120deg, rgba(0, 0, 0, 0.84) 20%, rgba(0, 0, 0, 0.46) 100%),
-    url('../images/background/asset-41.jpg') center/cover no-repeat;
+    url('../images/background/asset-41-1280.jpg') center/cover no-repeat;
   padding: 150px 0 90px;
 }
 
