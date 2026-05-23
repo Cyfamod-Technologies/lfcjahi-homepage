@@ -1,0 +1,11 @@
+/* Import existing vendor and theme CSS from public folder */
+@import url('/css/bootstrap.min.css');
+@import url('/css/style.css');
+@import url('/css/responsive.css');
+@import url('/css/lfc-jahi-media.css');
+@import url('/css/all.min.css');
+@import url('/css/fontawesome.min.css');
+@import url('/css/ionicons.min.css');
+@import url('/css/owl.carousel.min.css');
+@import url('/css/slick.min.css');
+@import url('/css/magnific-popup.min.css');
