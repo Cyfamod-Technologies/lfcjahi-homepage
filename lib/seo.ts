@@ -10,7 +10,7 @@ const churchRegion = 'Federal Capital Territory'
 const defaultTitle = 'Powerful Audio Messages & Sermons'
 const defaultDescription =
   'Access and download powerful audio messages and sermons from Living Faith Church Jahi. Grow spiritually with life-transforming teachings from anointed ministers.'
-const defaultOgImage = `${siteUrl}/images/logo-1.png`
+const defaultOgImage = `${siteUrl}/images/background/asset-41.jpg`
 const defaultKeywords = [
   'LFC-JAHI MEDIA',
   'Living Faith Church Jahi',
