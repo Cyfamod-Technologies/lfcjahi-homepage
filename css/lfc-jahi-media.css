@@ -116,6 +116,12 @@ body {
   color: var(--lfc-accent, #e8a020);
 }
 
+@media (max-width: 767px) {
+  .lfc-card-download-icon {
+    color: #e03030;
+  }
+}
+
 .lfc-card-speaker {
   display: flex;
   align-items: center;
