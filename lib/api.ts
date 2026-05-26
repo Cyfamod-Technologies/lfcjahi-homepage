@@ -37,6 +37,7 @@ function normalizeMessage(item: ApiMediaItem, index: number): Message {
     scripture: item.scripture || 'Matthew 6:33, Romans 10:17',
     series: service || item.category || 'Audio',
     description: item.description || '',
+    downloadCount: item.downloadCount ?? 0,
   }
 }
 

@@ -13,6 +13,7 @@ export interface Message {
   scripture: string
   series: string
   description: string
+  downloadCount: number
 }
 
 export interface ApiMediaItem {
@@ -30,6 +31,7 @@ export interface ApiMediaItem {
   shareUrl?: string
   scripture?: string
   description?: string
+  downloadCount?: number
 }
 
 export interface ApiDistrictItem {

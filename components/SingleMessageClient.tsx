@@ -141,9 +141,9 @@ export default function SingleMessageClient({ message, related }: SingleMessageC
                 <h5 className="text-white mb-3">Message Information</h5>
                 <ul className="lfc-meta-list">
                   <li><strong>Pastor:</strong><span id="metaPastor">{message.pastor}</span></li>
+                  <li><strong>Title:</strong><span id="metaTitle">{message.title}</span></li>
                   <li><strong>Date:</strong><span id="metaDate">{formattedDate}</span></li>
-                  <li><strong>Duration:</strong><span id="metaDuration">{message.series || 'Available for download'}</span></li>
-                  <li><strong>Series:</strong><span id="messageSeries">{message.series || '—'}</span></li>
+                  <li><strong>Downloads:</strong><span id="metaDownloads"><i className="fa fa-arrow-down" style={{ marginRight: 5, color: 'var(--lfc-accent, #e8a020)' }}></i>{message.downloadCount.toLocaleString()}</span></li>
                   <li><strong>Key Scripture:</strong><span id="messageScripture">{message.scripture || '—'}</span></li>
                 </ul>
                 <div className="gen-btn-container mt-4">

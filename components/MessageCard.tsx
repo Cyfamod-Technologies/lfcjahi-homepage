@@ -43,6 +43,13 @@ export default function MessageCard({ message }: MessageCardProps) {
                   <li>{message.duration}</li>
                 </ul>
               </div>
+              {message.description && (
+                <p className="lfc-card-description">{message.description}</p>
+              )}
+              <div className="lfc-card-downloads">
+                <i className="fa fa-arrow-down lfc-card-download-icon"></i>
+                <span>{message.downloadCount.toLocaleString()} download{message.downloadCount !== 1 ? 's' : ''}</span>
+              </div>
               <div className="lfc-card-speaker">
                 <Image
                   className="lfc-card-speaker-image"
