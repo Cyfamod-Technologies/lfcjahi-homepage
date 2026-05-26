@@ -44,7 +44,7 @@ export default function MessageCard({ message }: MessageCardProps) {
                 </ul>
               </div>
               {message.description && (
-                <p className="lfc-card-description">{message.description}</p>
+                <p className="lfc-card-description d-none d-md-block">{message.description}</p>
               )}
               <div className="lfc-card-downloads">
                 <i className="fa fa-arrow-down lfc-card-download-icon"></i>
