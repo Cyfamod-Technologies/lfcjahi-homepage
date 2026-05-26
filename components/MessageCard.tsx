@@ -53,8 +53,8 @@ export default function MessageCard({ message }: MessageCardProps) {
               <div className="lfc-card-speaker">
                 <Image
                   className="lfc-card-speaker-image"
-                  src={pastorImage}
-                  alt={message.pastor}
+                  src="/images/favicon.png"
+                  alt="LFC Jahi"
                   width={34}
                   height={34}
                   quality={45}
