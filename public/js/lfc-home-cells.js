@@ -1,0 +1,276 @@
+(function () {
+  var allCells = Array.isArray(window.homeCellsDirectory) ? window.homeCellsDirectory.slice() : [];
+  var currentFilter = '';
+
+  var searchInput = document.getElementById('cellSearch');
+  var filterSelect = document.getElementById('districtFilters');
+  var container = document.getElementById('cellsContainer');
+  var viewMoreWrap = document.getElementById('homeCellsViewMoreWrap');
+  var viewMoreButton = document.getElementById('homeCellsViewMoreButton');
+  var filteredDistricts = [];
+  var visibleCount = 3;
+  var pageSize = 3;
+
+  function escapeHtml(value) {
+    return String(value || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  function normalizeDistrict(item, index) {
+    return {
+      num: Number(item.sortOrder || item.num || index + 1),
+      name: item.name || '',
+      location: item.coverageAreas || item.location || '',
+      pastors: Array.isArray(item.homeCellPastors) ? item.homeCellPastors : (Array.isArray(item.pastors) ? item.pastors : []),
+      minister: item.homeCellMinister || item.minister || '',
+      zones: Array.isArray(item.zones) ? item.zones.map(function (zone, zoneIndex) {
+        return {
+          name: zone.name || '',
+          zoneMinister: zone.zoneMinister || '',
+          cells: Array.isArray(zone.cells) ? zone.cells.map(function (cell, cellIndex) {
+            return {
+              sortOrder: Number(cell.sortOrder || cellIndex + 1),
+              name: cell.name || '',
+              address: cell.address || '',
+              minister: cell.minister || '',
+              phone: cell.phone || ''
+            };
+          }) : [],
+          sortOrder: Number(zone.sortOrder || zoneIndex + 1)
+        };
+      }) : []
+    };
+  }
+
+  function loadDistricts(items) {
+    allCells = (items || []).map(normalizeDistrict).sort(function (a, b) {
+      return a.num - b.num;
+    });
+
+    renderFilters();
+    renderCells();
+  }
+
+  function buildPhoneLink(phone) {
+    var value = String(phone || '').trim();
+    var sanitized = value.replace(/[^\d+]/g, '');
+
+    if (!sanitized || sanitized === '—') {
+      return escapeHtml(value || '—');
+    }
+
+    return '<a href="tel:' + escapeHtml(sanitized) + '" style="color: var(--lfc-accent);">' + escapeHtml(value) + '</a>';
+  }
+
+  function buildAddressLink(address) {
+    var value = String(address || '').trim();
+
+    if (!value || value === '—') {
+      return escapeHtml(value || '—');
+    }
+
+    return (
+      '<a href="#" class="lfc-map-link" data-address="' + escapeHtml(value) + '" style="color: var(--lfc-accent);">' +
+        escapeHtml(value) +
+      '</a>'
+    );
+  }
+
+  function renderFilters() {
+    if (!filterSelect) {
+      return;
+    }
+
+    var options = ['<option value="">All Districts</option>'];
+
+    allCells.forEach(function (district) {
+      options.push(
+        '<option value="' + escapeHtml(district.name) + '">' +
+          escapeHtml(district.name + ' ' + district.num) +
+        '</option>'
+      );
+    });
+
+    filterSelect.innerHTML = options.join('');
+    filterSelect.value = currentFilter;
+  }
+
+  function renderCells() {
+    if (!container) {
+      return;
+    }
+
+    var searchValue = searchInput ? String(searchInput.value || '').toLowerCase() : '';
+
+    var filtered = allCells.filter(function (district) {
+      var matchesDistrict = !currentFilter || district.name === currentFilter;
+      if (!matchesDistrict) {
+        return false;
+      }
+
+      if (!searchValue) {
+        return true;
+      }
+
+      return (
+        district.name.toLowerCase().indexOf(searchValue) !== -1 ||
+        district.location.toLowerCase().indexOf(searchValue) !== -1 ||
+        district.pastors.some(function (pastor) { return pastor.toLowerCase().indexOf(searchValue) !== -1; }) ||
+        district.minister.toLowerCase().indexOf(searchValue) !== -1 ||
+        district.zones.some(function (zone) {
+          return (
+            zone.name.toLowerCase().indexOf(searchValue) !== -1 ||
+            zone.zoneMinister.toLowerCase().indexOf(searchValue) !== -1 ||
+            zone.cells.some(function (cell) {
+              return (
+                cell.name.toLowerCase().indexOf(searchValue) !== -1 ||
+                cell.address.toLowerCase().indexOf(searchValue) !== -1 ||
+                cell.minister.toLowerCase().indexOf(searchValue) !== -1 ||
+                cell.phone.indexOf(searchValue) !== -1
+              );
+            })
+          );
+        })
+      );
+    });
+
+    if (!filtered.length) {
+      container.innerHTML = '<div class="lfc-no-results"><h5>No Home Cells Found</h5><p>Try adjusting your search or filter criteria</p></div>';
+      if (viewMoreWrap) {
+        viewMoreWrap.classList.add('lfc-hidden');
+      }
+      return;
+    }
+
+    filteredDistricts = filtered;
+    if (visibleCount > filteredDistricts.length) {
+      visibleCount = filteredDistricts.length;
+    }
+
+    var visibleDistricts = filteredDistricts.slice(0, visibleCount);
+
+    container.innerHTML = visibleDistricts.map(function (district) {
+      var zonesHtml = district.zones.map(function (zone) {
+        var cellsHtml = zone.cells.map(function (cell) {
+          return (
+            '<tr>' +
+              '<td><strong>' + escapeHtml(cell.name) + '</strong></td>' +
+              '<td>' + buildAddressLink(cell.address) + '</td>' +
+              '<td>' + escapeHtml(cell.minister) + '</td>' +
+              '<td>' + buildPhoneLink(cell.phone) + '</td>' +
+            '</tr>'
+          );
+        }).join('');
+
+        return (
+          '<div class="lfc-zone-section">' +
+            '<h5>Zone: ' + escapeHtml(zone.name) + '</h5>' +
+            (zone.zoneMinister ? (
+              '<div class="lfc-info-group">' +
+                '<span class="lfc-info-label">Zone Minister:</span>' +
+                '<span class="lfc-info-value">' + escapeHtml(zone.zoneMinister) + '</span>' +
+              '</div>'
+            ) : '') +
+            '<div class="lfc-cells-table table-responsive">' +
+              '<table class="table">' +
+                '<thead><tr><th>Cell Name</th><th>Address</th><th>Cell Minister</th><th>Phone</th></tr></thead>' +
+                '<tbody>' + cellsHtml + '</tbody>' +
+              '</table>' +
+            '</div>' +
+          '</div>'
+        );
+      }).join('');
+
+      return (
+        '<div class="lfc-cell-card" data-district="' + escapeHtml(district.name) + '">' +
+          '<h4>' + escapeHtml(district.num + '. ' + district.name) + '</h4>' +
+          '<div class="lfc-info-group">' +
+            '<span class="lfc-info-label">Covering Areas:</span>' +
+            '<span class="lfc-info-value">' + escapeHtml(district.location) + '</span>' +
+          '</div>' +
+          '<div class="lfc-info-group">' +
+            '<span class="lfc-info-label">District Pastors:</span>' +
+            '<span class="lfc-info-value">' + district.pastors.map(escapeHtml).join('<br>') + '</span>' +
+          '</div>' +
+          '<div class="lfc-info-group">' +
+            '<span class="lfc-info-label">District Minister:</span>' +
+            '<span class="lfc-info-value">' + escapeHtml(district.minister) + '</span>' +
+          '</div>' +
+          zonesHtml +
+        '</div>'
+      );
+    }).join('');
+
+    if (viewMoreWrap) {
+      if (visibleDistricts.length < filteredDistricts.length) {
+        viewMoreWrap.classList.remove('lfc-hidden');
+      } else {
+        viewMoreWrap.classList.add('lfc-hidden');
+      }
+    }
+  }
+
+  if (filterSelect) {
+    filterSelect.addEventListener('change', function () {
+      currentFilter = filterSelect.value || '';
+      visibleCount = pageSize;
+      renderCells();
+    });
+  }
+
+  if (searchInput) {
+    searchInput.addEventListener('keyup', function () {
+      visibleCount = pageSize;
+      renderCells();
+    });
+  }
+
+  if (viewMoreButton) {
+    viewMoreButton.addEventListener('click', function () {
+      visibleCount = Math.min(filteredDistricts.length, visibleCount + pageSize);
+      renderCells();
+    });
+  }
+
+  if (container) {
+    container.addEventListener('click', function (event) {
+      var target = event.target;
+      if (!target || !target.classList || !target.classList.contains('lfc-map-link')) {
+        return;
+      }
+
+      event.preventDefault();
+
+      var address = target.getAttribute('data-address') || '';
+      if (!address) {
+        return;
+      }
+
+      var shouldOpen = window.confirm('Locate this address in Google Maps?');
+      if (!shouldOpen) {
+        return;
+      }
+
+      var mapsUrl = 'https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(address);
+      window.open(mapsUrl, '_blank', 'noopener');
+    });
+  }
+
+  loadDistricts(allCells);
+
+  if (window.lfcDirectoryApi && typeof window.lfcDirectoryApi.fetchDistrictDirectory === 'function') {
+    window.lfcDirectoryApi.fetchDistrictDirectory()
+      .then(function (items) {
+        if (Array.isArray(items) && items.length) {
+          loadDistricts(items);
+        }
+      })
+      .catch(function (error) {
+        console.error('Unable to load home cells from API.', error);
+      });
+  }
+})();
