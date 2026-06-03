@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import PageEffects from '@/components/PageEffects'
+import { getApiOrigin } from '@/lib/env'
 import { seoSite } from '@/lib/seo'
 
 export const viewport: Viewport = {
@@ -72,12 +73,14 @@ export const metadata: Metadata = {
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const apiOrigin = getApiOrigin()
+
   return (
     <html lang="en">
       <head>
         {/* Preconnect to external origins used heavily on every page */}
-        <link rel="preconnect" href="https://api.lfcjahi.com" />
-        <link rel="dns-prefetch" href="https://api.lfcjahi.com" />
+        <link rel="preconnect" href={apiOrigin} />
+        <link rel="dns-prefetch" href={apiOrigin} />
 
         {/* Parallel CSS loading — avoids the @import waterfall from globals.css */}
         <link rel="stylesheet" href="/css/bootstrap.min.css" />

@@ -6,8 +6,7 @@ import type {
   ApiDistrictItem,
 } from './types'
 import { slugify, buildDownloadBaseName, getFileExtension } from './utils'
-
-const API_BASE = (process.env.NEXT_PUBLIC_API_URL || 'https://api.lfcjahi.com').replace(/\/+$/, '')
+import { apiBaseUrl as API_BASE } from './env'
 
 function normalizeMessage(item: ApiMediaItem, index: number): Message {
   const title = item.title || 'Untitled Message'
