@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "mkdir -p /vercel/output/static/css",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
