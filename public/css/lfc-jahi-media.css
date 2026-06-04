@@ -103,20 +103,21 @@ body {
 }
 
 .lfc-card-downloads {
-  display: block;
-  width: 100%;
-  clear: both;
-  margin: 6px 0 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 4px 0 6px;
   font-size: 12px;
   color: var(--lfc-muted);
   line-height: 1;
-  white-space: nowrap;
+  flex-wrap: wrap;
 }
 
-.lfc-card-download-row {
+.lfc-card-download-meta {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
+  line-height: 1;
 }
 
 .lfc-card-download-count,
@@ -144,8 +145,6 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
-  width: 100%;
-  clear: both;
   margin-top: 10px;
 }
 

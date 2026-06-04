@@ -4,7 +4,6 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "prebuild": "mkdir -p /vercel/output/static 2>/dev/null && (rm -rf /vercel/output/static/css 2>/dev/null || true) && ln -s ../static /vercel/output/static/css || (mkdir -p ./vercel/output/static && (rm -rf ./vercel/output/static/css 2>/dev/null || true) && ln -s ../static ./vercel/output/static/css)",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"

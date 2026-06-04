@@ -43,9 +43,14 @@ export default function MessageCard({ message }: MessageCardProps) {
                   <li>{message.duration}</li>
                 </ul>
               </div>
-              <div className="lfc-card-downloads">
-                <i className="fa fa-arrow-down lfc-card-download-icon"></i>
-                <span>{message.downloadCount.toLocaleString()} download{message.downloadCount !== 1 ? 's' : ''}</span>
+              <div className="lfc-card-downloads" aria-label={`${message.downloadCount.toLocaleString()} downloads`}>
+                <div className="lfc-card-download-row">
+                  <i className="fa fa-arrow-down lfc-card-download-icon" aria-hidden="true"></i>
+                  <span className="lfc-card-download-count">{message.downloadCount.toLocaleString()}</span>
+                  <span className="lfc-card-download-label">
+                    download{message.downloadCount !== 1 ? 's' : ''}
+                  </span>
+                </div>
               </div>
               <div className="lfc-card-speaker">
                 <Image
