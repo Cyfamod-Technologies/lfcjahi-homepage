@@ -19,12 +19,17 @@ interface MessageLibraryProps {
 
 export default function MessageLibrary({ messages }: MessageLibraryProps) {
   const searchParams = useSearchParams()
+  const initialSearch = searchParams?.get('search') || ''
+  const initialYear = searchParams?.get('year') || ''
+  const initialMonth = searchParams?.get('month') || ''
+  const initialPastor = searchParams?.get('pastor') || ''
+  const initialService = searchParams?.get('service') || ''
 
-  const [search, setSearch] = useState(searchParams.get('search') || '')
-  const [year, setYear] = useState(searchParams.get('year') || '')
-  const [month, setMonth] = useState(searchParams.get('month') || '')
-  const [pastor, setPastor] = useState(searchParams.get('pastor') || '')
-  const [service, setService] = useState(searchParams.get('service') || '')
+  const [search, setSearch] = useState(initialSearch)
+  const [year, setYear] = useState(initialYear)
+  const [month, setMonth] = useState(initialMonth)
+  const [pastor, setPastor] = useState(initialPastor)
+  const [service, setService] = useState(initialService)
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE)
 
   const latestMessage = useMemo(() => sortByDate(messages)[0] || null, [messages])
