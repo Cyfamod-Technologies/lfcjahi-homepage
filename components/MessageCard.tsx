@@ -37,11 +37,11 @@ export default function MessageCard({ message }: MessageCardProps) {
               <div className="gen-movie-info">
                 <h3>{message.title}</h3>
               </div>
-              <div className="gen-movie-meta-holder">
-                <ul>
-                  <li><span>{formatDate(message.date)}</span></li>
-                  <li>{message.duration}</li>
-                </ul>
+              <div className="lfc-card-meta">
+                <div className="lfc-card-meta-row">
+                  <span className="lfc-card-date">{formatDate(message.date)}</span>
+                  <span className="lfc-card-service">{message.duration}</span>
+                </div>
               </div>
               <div className="lfc-card-downloads" aria-label={`${message.downloadCount.toLocaleString()} downloads`}>
                 <div className="lfc-card-download-row">
