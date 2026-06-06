@@ -750,8 +750,27 @@ html:not([data-dark-mode="true"]) .lfc-empty {
   color: #ffffff !important;
 }
 
+.gen-carousel-movies-style-1 .gen-movie-contain .gen-info-contain,
+.gen-carousel-movies-style-1 .gen-movie-contain .gen-movie-meta-holder ul,
+.gen-carousel-movies-style-1 .gen-movie-contain .gen-movie-meta-holder ul li,
+.gen-carousel-movies-style-1 .gen-movie-contain .gen-movie-meta-holder ul li span,
+.gen-carousel-movies-style-1 .gen-movie-contain .gen-movie-meta-holder ul li a,
+.gen-carousel-movies-style-1 .gen-movie-contain .gen-movie-meta-holder ul li a span {
+  color: #ffffff !important;
+}
+
+.lfc-card-meta-row,
+.lfc-card-date,
+.lfc-card-service,
+.lfc-card-downloads,
+.lfc-card-download-count,
+.lfc-card-download-label,
 .lfc-card-note {
-  color: #cccccc !important;
+  color: #ffffff !important;
+}
+
+.lfc-card-note {
+  color: #ffffff !important;
 }
 
 html:not([data-dark-mode="true"]) .lfc-count {
