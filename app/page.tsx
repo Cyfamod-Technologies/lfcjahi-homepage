@@ -1,9 +1,11 @@
-import type { Metadata } from 'next'
 import { Suspense } from 'react'
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import BackToTop from '@/components/BackToTop'
+import HomeSearchLauncher from '@/components/HomeSearchLauncher'
+import { HomeSearchProvider } from '@/components/HomeSearchContext'
 import MessageLibrary from '@/components/MessageLibrary'
 import { fetchMessages } from '@/lib/api'
 import { sortByDate } from '@/lib/utils'
@@ -37,7 +39,7 @@ export default async function HomePage() {
   )
 
   return (
-    <>
+    <HomeSearchProvider>
       <div id="gen-loading">
         <div id="gen-loading-center">
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -60,12 +62,9 @@ export default async function HomePage() {
                 page with description, streaming audio, and direct download.
               </p>
               <div className="gen-movie-action mt-4">
-                <div className="gen-btn-container mr-3 d-inline-block">
-                  <a href="#message-library" className="gen-button">
-                    <i className="fa fa-play"></i>
-                    <span className="text">Browse Library</span>
-                  </a>
-                </div>
+                <Suspense>
+                  <HomeSearchLauncher messages={messages} />
+                </Suspense>
               </div>
             </div>
           </div>
@@ -161,6 +160,6 @@ export default async function HomePage() {
 
       <Footer />
       <BackToTop />
-    </>
+    </HomeSearchProvider>
   )
 }
