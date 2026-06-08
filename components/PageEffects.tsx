@@ -26,22 +26,37 @@ export default function PageEffects() {
   // Scroll effects — scroll listener lives for the whole session
   useEffect(() => {
     const backToTop = document.getElementById('back-to-top')
+    const header = document.querySelector('header')
+    const body = document.body
     if (backToTop) backToTop.style.display = 'none'
 
     let ticking = false
+    let stickyActive = false
+    const stickyEnter = 300
+    const stickyExit = 220
+
+    function syncStickyState(shouldStick: boolean) {
+      if (!header || shouldStick === stickyActive) return
+
+      stickyActive = shouldStick
+      header.classList.toggle('gen-header-sticky', shouldStick)
+
+      if (shouldStick) {
+        body.style.paddingTop = `${header.getBoundingClientRect().height}px`
+      } else {
+        body.style.paddingTop = ''
+      }
+    }
+
     function onScroll() {
       if (ticking) return
       ticking = true
       requestAnimationFrame(() => {
         const scrollTop = window.scrollY || document.documentElement.scrollTop
-        const header = document.querySelector('header')
 
         if (header) {
-          if (scrollTop > 300) {
-            header.classList.add('gen-header-sticky', 'animated', 'fadeInDown', 'animate__faster')
-          } else {
-            header.classList.remove('gen-header-sticky', 'animated', 'fadeInDown', 'animate__faster')
-          }
+          const shouldStick = stickyActive ? scrollTop > stickyExit : scrollTop > stickyEnter
+          syncStickyState(shouldStick)
         }
 
         if (backToTop) {
@@ -53,7 +68,11 @@ export default function PageEffects() {
     }
 
     window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
+    onScroll()
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      body.style.paddingTop = ''
+    }
   }, [])
 
   return null
