@@ -68,6 +68,7 @@
       downloadUrl: downloadUrl,
       shareUrl: shareUrl,
       downloadFilename: downloadFilename,
+      downloadCount: Number(item.downloadCount || 0),
       scripture: item.scripture || 'Matthew 6:33, Romans 10:17',
       series: service || category,
       description: item.description || ''

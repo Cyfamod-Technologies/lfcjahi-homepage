@@ -27,11 +27,11 @@ export default function MessageCard({ message }: MessageCardProps) {
                 quality={60}
                 loading="lazy"
               />
-              {/* <div className="gen-movie-action">
+              <div className="gen-movie-action">
                 <span className="gen-button" aria-label={`Play ${message.title}`}>
                   <i className="fa fa-play"></i>
                 </span>
-              </div> */}
+              </div>
             </div>
             <div className="gen-info-contain">
               <div className="gen-movie-info">

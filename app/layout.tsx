@@ -76,7 +76,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const apiOrigin = getApiOrigin()
 
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         {/* Preconnect to external origins used heavily on every page */}
         <link rel="preconnect" href={apiOrigin} />

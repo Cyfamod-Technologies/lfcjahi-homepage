@@ -101,12 +101,12 @@ export default function SingleMessageClient({ message, related }: SingleMessageC
                   Your browser does not support the audio element.
                 </audio>
                 <div className="gen-movie-action mb-4">
-                  {/* <div className="gen-btn-container mr-3 d-inline-block">
+                  <div className="gen-btn-container mr-3 d-inline-block">
                     <button className="gen-button" type="button" onClick={handleDownload}>
                       <i className="fa fa-download"></i>
                       <span className="text">Download Message</span>
                     </button>
-                  </div> */}
+                  </div>
                   <div className="gen-btn-container d-inline-block">
                     <button className="gen-button gen-button-flat" type="button" onClick={handleCopyLink}>
                       <span className="text">{copyLabel}</span>

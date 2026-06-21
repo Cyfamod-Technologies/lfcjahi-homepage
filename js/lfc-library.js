@@ -175,6 +175,13 @@
                     '<li>' + msg.duration + '</li>' +
                   '</ul>' +
                 '</div>' +
+                '<div class="lfc-card-downloads" aria-label="' + Number(msg.downloadCount || 0).toLocaleString() + ' downloads">' +
+                  '<div class="lfc-card-download-row">' +
+                    '<i class="fa fa-arrow-down lfc-card-download-icon" aria-hidden="true"></i>' +
+                    '<span class="lfc-card-download-count">' + Number(msg.downloadCount || 0).toLocaleString() + '</span>' +
+                    '<span class="lfc-card-download-label">download' + (Number(msg.downloadCount || 0) === 1 ? '' : 's') + '</span>' +
+                  '</div>' +
+                '</div>' +
                 '<div class="lfc-card-speaker">' +
                   '<img class="lfc-card-speaker-image" src="' + pastorImage + '" alt="' + msg.pastor + '">' +
                   '<p class="lfc-card-note">' + msg.pastor + '</p>' +
