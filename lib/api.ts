@@ -7,6 +7,7 @@ import type {
 } from './types'
 import { slugify, buildDownloadBaseName, getFileExtension } from './utils'
 import { apiBaseUrl as API_BASE } from './env'
+import mediaSnapshot from '@/data/media-snapshot.json'
 
 function normalizeMessage(item: ApiMediaItem, index: number): Message {
   const title = item.title || 'Untitled Message'
@@ -40,6 +41,16 @@ function normalizeMessage(item: ApiMediaItem, index: number): Message {
   }
 }
 
+function normalizeMessages(items: ApiMediaItem[]): Message[] {
+  const audio = items.filter(
+    (item) => String(item.category || '').toLowerCase() === 'audio' && item.mediaUrl,
+  )
+  const source = audio.length ? audio : items.filter((item) => !!item.mediaUrl)
+  return source.map(normalizeMessage).filter((message) => !!message.audioUrl)
+}
+
+const snapshotMessages = normalizeMessages(mediaSnapshot.data as ApiMediaItem[])
+
 export async function fetchMessages(): Promise<Message[]> {
   try {
     const res = await fetch(`${API_BASE}/api/media`, {
@@ -49,13 +60,10 @@ export async function fetchMessages(): Promise<Message[]> {
     if (!res.ok) throw new Error('Failed to fetch media')
     const payload = await res.json()
     const items: ApiMediaItem[] = Array.isArray(payload?.data) ? payload.data : []
-    const audio = items.filter(
-      (item) => String(item.category || '').toLowerCase() === 'audio' && item.mediaUrl,
-    )
-    const source = audio.length ? audio : items.filter((item) => !!item.mediaUrl)
-    return source.map(normalizeMessage).filter((m) => !!m.audioUrl)
+    const messages = normalizeMessages(items)
+    return messages.length ? messages : snapshotMessages
   } catch {
-    return []
+    return snapshotMessages
   }
 }
 
