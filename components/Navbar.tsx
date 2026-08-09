@@ -61,9 +61,12 @@ export default function Navbar({ activeItem, headerAction }: NavbarProps) {
                           <Link href="/#about-ministry">About</Link>
                         </li>
                       )}
-                      <li className={`menu-item lfc-menu-login${activeItem === 'login' ? ' active' : ''}`}>
-                        <Link href="/login">Login</Link>
-                      </li>
+                      {/* Login is temporarily hidden from the public site. */}
+                      {/*
+                        <li className={`menu-item lfc-menu-login${activeItem === 'login' ? ' active' : ''}`}>
+                          <Link href="/login">Login</Link>
+                        </li>
+                      */}
                     </ul>
                   </div>
                 </div>
