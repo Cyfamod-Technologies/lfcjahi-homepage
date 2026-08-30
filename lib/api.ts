@@ -6,7 +6,7 @@ import type {
   ApiDistrictItem,
 } from './types'
 import { slugify, buildDownloadBaseName, getFileExtension } from './utils'
-import { apiBaseUrl as API_BASE } from './env'
+import { apiBaseUrl as API_BASE, siteBaseUrl as SITE_BASE } from './env'
 import mediaSnapshot from '@/data/media-snapshot.json'
 
 function normalizeMessage(item: ApiMediaItem, index: number): Message {
@@ -19,7 +19,9 @@ function normalizeMessage(item: ApiMediaItem, index: number): Message {
   const mediaUrl = item.mediaUrl || ''
   const safeId = item.id || slugify(`${title}-${date}-${index}`)
   const downloadUrl = item.downloadUrl || (item.id ? `${API_BASE}/api/media/${item.id}/download` : mediaUrl)
-  const shareUrl = item.shareUrl || (item.id ? `${API_BASE}/messages/${item.id}` : `/messages/${encodeURIComponent(safeId)}`)
+  // Message pages live on the public site. Do not trust the API-provided
+  // shareUrl here because older API responses used the API host for it.
+  const shareUrl = `${SITE_BASE}/messages/${encodeURIComponent(safeId)}`
   const downloadFilename = buildDownloadBaseName(title, pastor, date) + '.' + getFileExtension(mediaUrl || downloadUrl)
 
   return {

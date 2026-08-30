@@ -13,7 +13,7 @@ interface SingleMessageClientProps {
 }
 
 export default function SingleMessageClient({ message, related }: SingleMessageClientProps) {
-  const [copyLabel, setCopyLabel] = useState('Copy Message Link')
+  const [copyLabel, setCopyLabel] = useState('Share Message Link')
   const formattedDate = formatDate(message.date, 'long')
 
   useEffect(() => {
@@ -55,7 +55,7 @@ export default function SingleMessageClient({ message, related }: SingleMessageC
     if (navigator.clipboard?.writeText) {
       navigator.clipboard.writeText(url).then(() => {
         setCopyLabel('Link Copied')
-        setTimeout(() => setCopyLabel('Copy Message Link'), 2000)
+        setTimeout(() => setCopyLabel('Share Message Link'), 2000)
       })
     }
   }

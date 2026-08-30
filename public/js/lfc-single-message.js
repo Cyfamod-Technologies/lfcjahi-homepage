@@ -193,7 +193,7 @@
           navigator.clipboard.writeText(url).then(function () {
             shareBtn.innerHTML = '<span class=\"text\">Link Copied</span>';
             setTimeout(function () {
-              shareBtn.innerHTML = '<span class=\"text\">Copy Message Link</span>';
+              shareBtn.innerHTML = '<span class=\"text\">Share Message Link</span>';
             }, 2000);
           });
         }
