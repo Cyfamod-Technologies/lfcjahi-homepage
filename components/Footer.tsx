@@ -65,6 +65,7 @@ export default function Footer({ minimal = false }: FooterProps) {
             <div className="row">
               <div className="col-md-12 align-self-center">
                 <span className="gen-copyright">Copyright 2026 LFC-JAHI MEDIA. All rights reserved.</span>
+                <div style={{ marginTop: 8 }}><Link href="/privacy-policy">Privacy Policy</Link></div>
                 {!minimal && (
                   <div className="lfc-footer-credit">Built in service by Cyfamod Technologies</div>
                 )}
