@@ -65,7 +65,10 @@ export default function Footer({ minimal = false }: FooterProps) {
             <div className="row">
               <div className="col-md-12 align-self-center">
                 <span className="gen-copyright">Copyright 2026 LFC-JAHI MEDIA. All rights reserved.</span>
-                <div style={{ marginTop: 8 }}><Link href="/privacy-policy">Privacy Policy</Link></div>
+                <nav aria-label="Legal" style={{ marginTop: 8, display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '8px 20px' }}>
+                  <Link href="/privacy-policy">Privacy Policy</Link>
+                  <Link href="/terms-of-service">Terms of Service</Link>
+                </nav>
                 {!minimal && (
                   <div className="lfc-footer-credit">Built in service by Cyfamod Technologies</div>
                 )}
