@@ -37,7 +37,7 @@ export default async function MessagePage({ params }: PageProps) {
   const { id } = await params
   const messages = await fetchMessages()
   const sorted = sortByDate(messages)
-  const message = sorted.find((m) => m.id === decodeURIComponent(id)) || sorted[0]
+  const message = sorted.find((m) => m.id === decodeURIComponent(id))
 
   if (!message) notFound()
 

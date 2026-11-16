@@ -30,7 +30,7 @@ export default function TermsOfServicePage() {
           <section>
             <h2>2. Listening and access</h2>
             <p>The service provides sermons, prayer guides and church resources for spiritual growth. Public listening is currently free and does not require a listener account. Your internet provider may charge for the data used to browse, stream or download content.</p>
-            <p>You are responsible for using a compatible device and maintaining your connection. Cached message information is available for browsing where supported; it does not mean audio is available offline. Background playback and device controls depend on your device and operating system.</p>
+            <p>You are responsible for using a compatible device and maintaining your connection. Cached message information is available for browsing where supported. Messages you download in the app are saved on your device for offline listening; other audio requires an internet connection. Background playback and device controls depend on your device and operating system.</p>
           </section>
           <section>
             <h2>3. Permitted use and sharing</h2>

@@ -1,0 +1,10 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.cyfamod.lfcjahi.media",
+      "sha256_cert_fingerprints": ["0A:B8:1D:61:02:89:91:3C:DD:E9:72:52:64:1C:62:57:8A:BF:AC:D9:D7:AA:F2:12:9C:54:11:B4:A5:AC:34:13"]
+    }
+  }
+]

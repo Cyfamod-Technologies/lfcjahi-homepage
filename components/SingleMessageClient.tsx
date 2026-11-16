@@ -14,6 +14,7 @@ interface SingleMessageClientProps {
 
 export default function SingleMessageClient({ message, related }: SingleMessageClientProps) {
   const [copyLabel, setCopyLabel] = useState('Share Message Link')
+  const appLink = `intent://messages/${encodeURIComponent(message.id)}#Intent;scheme=lfcjahi;package=com.cyfamod.lfcjahi.media;S.browser_fallback_url=${encodeURIComponent(message.shareUrl)};end`;
   const formattedDate = formatDate(message.date, 'long')
 
   useEffect(() => {
@@ -101,6 +102,9 @@ export default function SingleMessageClient({ message, related }: SingleMessageC
                   Your browser does not support the audio element.
                 </audio>
                 <div className="gen-movie-action mb-4">
+                  <div className="gen-btn-container mr-3 mb-3 d-inline-block">
+                    <a href={appLink} className="gen-button gen-button-flat"><span className="text">Open in Android App</span></a>
+                  </div>
                   <div className="gen-btn-container mr-3 d-inline-block">
                     <button className="gen-button" type="button" onClick={handleDownload}>
                       <i className="fa fa-download"></i>

@@ -72,7 +72,7 @@ export async function fetchMessages(): Promise<Message[]> {
 export async function fetchMessageById(id: string): Promise<Message | null> {
   const messages = await fetchMessages()
   const sorted = [...messages].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-  return sorted.find((m) => m.id === id) || sorted[0] || null
+  return sorted.find((m) => m.id === id) || null
 }
 
 function normalizeDistrict(item: ApiDistrictItem, index: number): District {

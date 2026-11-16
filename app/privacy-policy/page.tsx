@@ -36,7 +36,7 @@ export default function PrivacyPolicyPage() {
           </section>
           <section>
             <h2>3. Information stored on your device</h2>
-            <p>The mobile app stores your saved-message selections, prayer progress, display theme and cached message information on your device. These preferences are not synchronized to a listener account. Cached message information allows offline browsing; it does not make streamed audio available offline.</p>
+            <p>The mobile app stores your saved-message selections, prayer progress, display theme and cached message information on your device. These preferences are not synchronized to a listener account. Cached message information allows offline browsing. Audio you explicitly download is stored on your device for offline listening and appears in Saved. Streaming messages that have not been downloaded requires an internet connection.</p>
             <p>The website uses browser storage to remember your light or dark display preference. Our backend may also set session and security cookies when it receives requests. These support service operation and request security.</p>
             <p>You can remove local app information by clearing the app’s storage or uninstalling it, subject to your device’s backup and restore settings. Website information can be removed through your browser’s site-data settings. Clearing this information may reset your preferences and saved items.</p>
           </section>
